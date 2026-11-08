@@ -1,0 +1,14 @@
+{
+  "name": "RagaHru — Wedding invitation websites",
+  "short_name": "RagaHru",
+  "description": "Wedding invitation websites your guests open straight from WhatsApp.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "browser",
+  "background_color": "#4A1520",
+  "theme_color": "#4A1520",
+  "icons": [
+    { "src": "assets/logo/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/logo/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

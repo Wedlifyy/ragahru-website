@@ -1,0 +1,6 @@
+# Every page of RagaHru may be indexed.
+User-agent: *
+Allow: /
+
+# Once the site has its address, add a sitemap and name it here, e.g.
+# Sitemap: https://ragahru.com/sitemap.xml

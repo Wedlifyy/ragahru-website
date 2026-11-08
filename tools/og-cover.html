@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RagaHru share card</title>
+<!--
+  The card WhatsApp, Instagram and Facebook show when ragahru.com is shared
+  (assets/logo/og-cover.jpg, 1200 x 630). It is drawn with the site's own
+  stylesheet, so the phones, the arch and the zari border are the real ones.
+
+  To render it again after changing a poster or the copy, with the preview
+  server running (npx http-server -p 5173), run from the project folder:
+
+    "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new
+      --hide-scrollbars --window-size=1200,630 --virtual-time-budget=6000
+      --screenshot="assets\logo\og-cover.png"
+      http://localhost:5173/tools/og-cover.html
+
+  then save it as a JPEG (quality about 88) beside it as og-cover.jpg - the
+  page links the JPEG, which stays under WhatsApp's size limit.
+-->
+<link rel="stylesheet" href="../css/site.css">
+<style>
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { background: var(--silk); }
+  body::after { display: none; }
+
+  .og {
+    --focus: var(--zari);
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    color: var(--on-silk);
+    background:
+      radial-gradient(60% 80% at 78% 30%, rgba(118, 40, 54, 0.85), rgba(98, 32, 44, 0) 70%),
+      radial-gradient(60% 60% at 8% 100%, rgba(44, 11, 18, 0.9), rgba(44, 11, 18, 0) 70%),
+      var(--silk);
+  }
+
+  /* one warm bloom behind the phones, as in the masthead */
+  .og::before {
+    content: "";
+    position: absolute;
+    left: 590px;
+    top: -60px;
+    width: 640px;
+    height: 640px;
+    background: radial-gradient(closest-side, rgba(216, 180, 110, 0.2), rgba(216, 180, 110, 0));
+  }
+
+  .og__copy {
+    position: absolute;
+    left: 84px;
+    top: 74px;
+    width: 560px;
+  }
+
+  .og__brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--serif);
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .og__brand img { width: 64px; height: 64px; }
+
+  .og__tagline {
+    margin-top: 18px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 27px;
+    color: var(--zari-lt);
+  }
+
+  .og .signature { opacity: 1; transform: none; width: 84px; margin: 26px 0 26px; }
+
+  .og__title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 84px;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+  }
+
+  .og__facts {
+    display: flex;
+    gap: 34px;
+    margin-top: 34px;
+    font-size: 24px;
+    color: var(--on-silk-2);
+    font-variant-numeric: lining-nums;
+  }
+  .og__facts li { display: inline-flex; align-items: center; gap: 14px; }
+  .og__facts li::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border: 1.5px solid var(--zari);
+    transform: rotate(45deg);
+  }
+  .og__facts strong { color: var(--on-silk); font-weight: 600; }
+
+  /* the masthead's stage, held still */
+  .og .hero__stage {
+    --hero-phone-h: 400px;
+    position: absolute;
+    left: 640px;
+    top: 52px;
+    width: 470px;
+    height: 520px;
+    translate: none;
+    rotate: none;
+  }
+  .og .hero__stage .hero__phone { transition: none; }
+  .og .hero__stage .hero__phone .phone__body { animation: none !important; }
+  .og .hero__stage .hero__phone[data-pos="left"] {
+    transform: translate(-50%, -50%) translate3d(-128px, 16px, 0) scale(0.78);
+  }
+  .og .hero__stage .hero__phone[data-pos="right"] {
+    transform: translate(-50%, -50%) translate3d(128px, 16px, 0) scale(0.78);
+  }
+  .og .hero__stage .hero__phone[data-pos="left"] .phone__body { transform: rotate(-1.4deg); }
+  .og .hero__stage .hero__phone[data-pos="right"] .phone__body { transform: rotate(1.4deg); }
+
+  .og .zari {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 40px;
+  }
+  .og .zari__light { animation: none; transform: translate3d(40%, 0, 0); }
+</style>
+</head>
+<body>
+<div class="og">
+  <div class="og__copy">
+    <p class="og__brand"><img src="../assets/logo/ragahru-mark.png" alt="">RagaHru</p>
+    <p class="og__tagline">The melody of every moment</p>
+    <span class="signature" aria-hidden="true"></span>
+    <h1 class="og__title">Your wedding,<br>in one link.</h1>
+    <ul class="og__facts">
+      <li><span>Live within 24 hours</span></li>
+      <li><span>Designs from <strong>&#8377;999</strong></span></li>
+    </ul>
+  </div>
+
+  <div class="hero__stage">
+    <span class="niche niche--silk"></span>
+    <div class="phone hero__phone" data-pos="left">
+      <div class="phone__body"><div class="phone__screen">
+        <img class="phone__poster" src="../assets/hero/posters/phone-01.jpg" alt="">
+        <span class="phone__sheen"></span>
+      </div></div>
+      <span class="phone__shadow"></span>
+    </div>
+    <div class="phone hero__phone" data-pos="right">
+      <div class="phone__body"><div class="phone__screen">
+        <img class="phone__poster" src="../assets/hero/posters/phone-03.jpg" alt="">
+        <span class="phone__sheen"></span>
+      </div></div>
+      <span class="phone__shadow"></span>
+    </div>
+    <div class="phone hero__phone" data-pos="center">
+      <div class="phone__body"><div class="phone__screen">
+        <img class="phone__poster" src="../assets/hero/posters/phone-02.jpg" alt="">
+        <span class="phone__sheen"></span>
+      </div></div>
+      <span class="phone__shadow"></span>
+    </div>
+  </div>
+
+  <div class="zari" aria-hidden="true"><span class="zari__thread"><span class="zari__light"></span></span></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+# ---- operating system ----
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# ---- editors ----
+.vscode/
+.idea/
+*.swp
+*~
+
+# ---- logs and dependencies (not used, kept for safety) ----
+node_modules/
+npm-debug.log*
+yarn-error.log*
+*.log
+
+# ---- raw video working files ----
+# Finished previews inside templates/**/preview/ ARE tracked and deployed.
+# Only the heavy source material in previews/ is ignored.
+previews/*.mov
+previews/*.MOV
+previews/*.avi
+previews/*.mkv
+previews/*.mp4
+previews/*.prproj
+previews/*.veg
+previews/*.aep
+
+# ---- local backups made before a redesign (not deployed) ----
+.backup-*/

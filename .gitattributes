@@ -1,0 +1,8 @@
+# Normalise text files to LF in the repository; Git converts on checkout.
+* text=auto
+
+*.mp4   binary
+*.jpg   binary
+*.png   binary
+*.webp  binary
+*.woff2 binary
