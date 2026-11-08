@@ -68,8 +68,9 @@ actually sent, with their permission.
 that block, set `saleLabel` to `""`, and remove `originalPrice` from the
 templates (it is what shows the struck-through price).
 
-**Design links.** Every design has its own address, e.g. `/#HN01`, which opens
-its preview directly. "Share with family" in the preview sends that link.
+**Design links.** Every design has its own address, e.g. `/#HN01`, which scrolls
+to that design's card. "Share with family" in the preview sends that link. A
+preview only opens when a visitor taps a design.
 
 ## Running locally
 

@@ -254,7 +254,6 @@
       coming: document.getElementById('modal-coming'),
       replay: document.getElementById('modal-replay'),
       code: '',
-      previousHash: '',
       opener: null,
       active: false,
       closeTimer: null
@@ -368,11 +367,9 @@
 
     clearTimeout(modal.closeTimer);
     if (!dialog.open) {
-      modal.previousHash = byCode[codeFromHash()] ? '' : window.location.hash;
       modal.opener = opener || document.querySelector('.card__trigger[data-template="' + CSS.escape(t.code) + '"]');
     }
     modal.code = t.code;
-    writeHash('#' + encodeURIComponent(t.code));
 
     fillPreview(t);
     loadMedia(t);
@@ -425,10 +422,7 @@
     modal.phone.style.transition = '';
 
     stopMedia();
-    if (modal.code) {
-      writeHash(modal.previousHash);
-      modal.code = '';
-    }
+    modal.code = '';
     if (modal.opener && modal.opener.isConnected) {
       modal.opener.focus({ preventScroll: true });
     }
@@ -448,34 +442,21 @@
     }
   }
 
-  /* ---- a link for every design (#HN01) ---- */
+  /* ---- a link for every design (#HN01) ----
+     A shared link brings the visitor to that design's card. The preview
+     itself only ever opens when someone taps it. */
 
-  function codeFromHash() {
-    try { return decodeURIComponent(window.location.hash.slice(1)); } catch (err) { return ''; }
-  }
+  function scrollToDesign(smooth) {
+    var code = '';
+    try { code = decodeURIComponent(window.location.hash.slice(1)); } catch (err) { return; }
 
-  function writeHash(hash) {
-    history.replaceState(history.state, '', hash || window.location.pathname + window.location.search);
-  }
+    var card = byCode[code] && sourcePhone(byCode[code].code);
+    if (!card) { return; }
 
-  function openFromHash() {
-    var code = codeFromHash();
-    if (!byCode[code]) {
-      closePreview();
-      return;
-    }
-    if (modal.dialog && modal.dialog.open && modal.code === byCode[code].code) { return; }
-
-    // Bring the design into view behind the preview, so closing lands on it.
-    // Jump rather than glide: the opening animation measures where it is.
-    var card = sourcePhone(byCode[code].code);
-    if (card) {
-      var html = document.documentElement;
-      html.style.scrollBehavior = 'auto';
-      card.scrollIntoView({ block: 'center' });
-      html.style.scrollBehavior = '';
-    }
-    openPreview(code);
+    var html = document.documentElement;
+    if (!smooth) { html.style.scrollBehavior = 'auto'; }
+    card.closest('.card').scrollIntoView({ block: 'center' });
+    html.style.scrollBehavior = '';
   }
 
   /* ---- links, prices, testimonials ---- */
@@ -632,8 +613,8 @@
 
     document.getElementById('footer-year').textContent = String(new Date().getFullYear());
 
-    window.addEventListener('hashchange', openFromHash);
-    if (byCode[codeFromHash()]) { openFromHash(); }
+    window.addEventListener('hashchange', function () { scrollToDesign(true); });
+    scrollToDesign(false);
 
     // The header's initial state is set; from here on its changes animate.
     requestAnimationFrame(function () {
